@@ -1,26 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import 'wired-elements';
+import Header from 'components/header';
+import LandingSection from 'sections/landing';
+import styles from './app.module.scss';
+import AmbitionsSection from 'sections/ambitions';
+import WhoAreWeSection from 'sections/whoAreWe';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () =>
+  <div className={styles.content}>
+    <Header />
+    <LandingSection />
+    <AmbitionsSection />
+    <WhoAreWeSection />
+  </div>
 
 export default App;
