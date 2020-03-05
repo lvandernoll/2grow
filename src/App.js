@@ -5,6 +5,7 @@ import LandingSection from 'sections/landing';
 import styles from './app.module.scss';
 import AmbitionsSection from 'sections/ambitions';
 import WhoAreWeSection from 'sections/whoAreWe';
+import OurServicesSection from 'sections/ourServices';
 
 const App = () =>
   <div className={styles.content}>
@@ -12,6 +13,8 @@ const App = () =>
     <LandingSection />
     <AmbitionsSection />
     <WhoAreWeSection />
+    <OurServicesSection />
+    <AmbitionsSection />
   </div>
 
 export default App;
