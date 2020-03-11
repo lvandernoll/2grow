@@ -4,7 +4,7 @@ import styles from './whoAreWe.module.scss';
 import img from 'img/placeholder.png';
 
 const WhoAreWeSection = () =>
-  <Section className={styles.whoAreWe}>
+  <Section name='wie-zijn-wij' className={styles.whoAreWe}>
     <div className={styles.whoAreWeItem}>
       <wired-image src={img} class={styles.whoAreWeItemPortret} />
       <div className={styles.whoAreWeItemInfo}>

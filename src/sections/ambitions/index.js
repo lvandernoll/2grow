@@ -4,7 +4,7 @@ import styles from './ambitions.module.scss';
 import img from 'img/placeholder.png';
 
 const AmbitionsSection = () =>
-  <Section className={styles.ambitions}>
+  <Section name='onze-ambities' className={styles.ambitions}>
     <div className={styles.ambitionsContent}>
       <h3>{'Onze ambities'}</h3>
       <p className={styles.ambitionsContentParagraph}>
