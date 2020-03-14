@@ -35,6 +35,7 @@ class Header extends Component {
               <NavButton section='onze-ambities' text='Onze ambities' />
               <NavButton section='wie-zijn-wij' text='Wie zijn wij' />
               <NavButton section='onze-diensten' text='Onze diensten' />
+              <NavButton section='onze-werkwijze' text='Onze werkwijze' />
             </ul>
           </nav>
         </div>

@@ -6,6 +6,7 @@ import LandingSection from 'sections/landing';
 import AmbitionsSection from 'sections/ambitions';
 import WhoAreWeSection from 'sections/whoAreWe';
 import OurServicesSection from 'sections/ourServices';
+import WayOfWorkingSection from 'sections/wayOfWorking';
 
 class App extends Component {
   componentDidMount = () => {
@@ -30,7 +31,7 @@ class App extends Component {
         <AmbitionsSection />
         <WhoAreWeSection />
         <OurServicesSection />
-        <AmbitionsSection />
+        <WayOfWorkingSection />
       </div>
     </>
 }
