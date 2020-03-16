@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './section.module.scss';
 
-const Section = props =>
-  <wired-card id={props.name} class={styles.section}>
-    <section className={props.className}>
-      {props.children}
+const Section = ({ name, className, children }) =>
+  <wired-card id={name} class={styles.section}>
+    <section className={className}>
+      {children}
     </section>
   </wired-card>
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import 'wired-elements';
 import styles from './app.module.scss';
 import Header from 'components/header';
@@ -8,22 +8,26 @@ import WhoAreWeSection from 'sections/whoAreWe';
 import OurServicesSection from 'sections/ourServices';
 import WayOfWorkingSection from 'sections/wayOfWorking';
 
-class App extends Component {
-  componentDidMount = () => {
+const App = () => {
+  useEffect(() => {
     if(window.location.pathname !== '/') {
-      const section = document.querySelector(`#${window.location.pathname.slice(1)}`);
-      if(section) {
-        setTimeout(()=>{
-          window.scrollTo({
-            top: section.offsetTop - styles.headerHeight.slice(0, -2),
-            behavior: 'smooth',
-          });
-        }, 500)
+      try {
+        const section = document.querySelector(`#${window.location.pathname.slice(1)}`);
+        if(section) {
+          setTimeout(()=>{
+            window.scrollTo({
+              top: section.offsetTop - styles.headerHeight.slice(0, -2),
+              behavior: 'smooth',
+            });
+          }, 500);
+        }
+      } catch(e) {
+        console.error(e);
       }
     }
-  }
+  });
 
-  render = () =>
+  return (
     <>
       <Header />
       <div className={styles.content}>
@@ -34,6 +38,7 @@ class App extends Component {
         <WayOfWorkingSection />
       </div>
     </>
+  );
 }
 
 export default App;

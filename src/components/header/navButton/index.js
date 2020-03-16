@@ -1,55 +1,41 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../header.module.scss';
 
-class NavButton extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      inView: false,
-      hover: false,
-    };
+const NavButton = ({ sectionId, text}) => {
+  const [inView, setInView] = useState(false);
+  const [hover, setHover] = useState(false);
 
-    this.section = <></>;
-  }
-
-  componentDidMount = () => {
-    this.section = document.querySelector(`#${this.props.section}`);
+  useEffect(() => {
+    const section = document.querySelector(`#${sectionId}`);
     window.addEventListener('scroll', () => {
       const scrollWindow = window.scrollY + (styles.headerHeight.slice(0, -2) * 1 + 1);
-      const inView = scrollWindow > this.section.offsetTop && scrollWindow < this.section.offsetTop + this.section.scrollHeight;
+      const newInView = scrollWindow > section.offsetTop && scrollWindow < section.offsetTop + section.scrollHeight;
 
-      if(!this.state.inView && inView) {
-        this.setState({ inView: true });
-      } else if(this.state.inView && !inView) {
-        this.setState({ inView: false });
+      if(!inView && newInView) {
+        setInView(true);
+      } else if(inView && !newInView) {
+        setInView(false);
       }
     });
-  }
+  });
 
-  onHover = () => this.setState({ hover: true });
-
-  onBlur = () => this.setState({ hover: false });
-
-  onClick = () => {
+  const scrollToSection = () => {
+    const section = document.querySelector(`#${sectionId}`);
     const headerHeight = styles.headerHeight.slice(0, -2);
     window.scrollTo({
-      top: this.section.offsetTop - headerHeight,
+      top: section.offsetTop - headerHeight,
       behavior: 'smooth',
     });
-    window.history.replaceState(null, null, this.props.section);
+    window.history.replaceState(null, null, sectionId);
   }
 
-  render = () => {
-    const { onClick, onHover, onBlur } = this;
-    const { inView, hover } = this.state;
-    return (
-      <li onClick={onClick} onMouseOver={onHover} onMouseOut={onBlur} className={styles.headerNavListItem}>
-        <wired-button elevation={inView ? 4 : hover ? 3 : 0} id={`${this.props.section}Button`} class={styles.headerNavListItemButton}>
-          {this.props.text}
-        </wired-button>
-      </li>
-    );
-  }
+  return (
+    <li onClick={scrollToSection} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} className={styles.headerNavListItem}>
+      <wired-button elevation={inView ? 4 : hover ? 3 : 0} id={`${sectionId}Button`} class={styles.headerNavListItemButton}>
+        {text}
+      </wired-button>
+    </li>
+  );
 }
 
 export default NavButton;

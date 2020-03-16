@@ -1,30 +1,26 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import styles from './accordeonTab.module.scss';
 
-class AccordeonTab extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      active: this.props.active,
-    };
-  }
+const AccordeonTab = ({ initialActive, header, content }) => {
+  const [active, setActive] = useState(initialActive);
 
-  onClick = () => this.setState({ active: !this.state.active });
+  const onClick = () => setActive(!active);
 
-  render = () =>
-    <wired-card onClick={this.onClick} class={`${styles.accordeonTab}  ${this.state.active ? styles.accordeonTabActive : ''}`}>
-      <wired-card fill={this.state.active ? styles.mainColor : ''} class={styles.accordeonTabHeader}>
+  return (
+    <wired-card class={`${styles.accordeonTab}  ${active ? styles.accordeonTabActive : ''}`}>
+      <wired-card onClick={onClick} fill={active ? styles.mainColor : ''} class={styles.accordeonTabHeader}>
         <div className={styles.accordeonTabHeaderContent}>
-          <span className={styles.accordeonTabHeaderContentText}>{this.props.header}</span>
+          <span className={styles.accordeonTabHeaderContentText}>{header}</span>
           <FontAwesomeIcon icon={faCaretDown} className={styles.accordeonTabHeaderContentIcon} />
         </div>
       </wired-card>
       <p className={styles.accordeonTabContent}>
-        {this.props.content}
+        {content}
       </p>
     </wired-card>
+  );
 }
 
 export default AccordeonTab;

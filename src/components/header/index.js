@@ -1,30 +1,28 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './header.module.scss';
 import logo from 'img/logo.svg';
 import NavButton from './navButton';
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      collapsed: false,
-    };
-  }
+const Header = () => {
+  const [collapsed, setCollapsed] = useState(false);
 
-  componentDidMount = () => {
+  useEffect(() => {
     const headerHeight = styles.headerHeight.slice(0, -2);
-    window.addEventListener('scroll', () => {
-      if(!this.state.collapsed && window.scrollY > headerHeight) {
-        this.setState({ collapsed: true });
-      } else if(this.state.collapsed && window.scrollY <= headerHeight) {
-        this.setState({ collapsed: false });
-      }
-    });
+    updateHeader(headerHeight);
+    window.addEventListener('scroll', () => updateHeader(headerHeight));
+  });
+  
+  const updateHeader = headerHeight => {
+    if(!collapsed && window.scrollY > headerHeight) {
+      setCollapsed(true);
+    } else if(collapsed && window.scrollY <= headerHeight) {
+      setCollapsed(false);
+    }
   }
 
-  render = () =>
+  return (
     <header>
-      <wired-card class={`${styles.header} ${this.state.collapsed ? styles.headerOpened : ''}`} elevation='5' fill={styles.mainColor}>
+      <wired-card class={`${styles.header} ${collapsed ? styles.headerOpened : ''}`} elevation='5' fill={styles.mainColor}>
         <div className={styles.headerContent}>
           <div className={styles.headerBranding}>
             <img alt='2Grow logo' src={logo} className={styles.headerBrandingLogo} />
@@ -32,15 +30,16 @@ class Header extends Component {
           </div>
           <nav className={styles.headerNav}>
             <ul className={styles.headerNavList}>
-              <NavButton section='onze-ambities' text='Onze ambities' />
-              <NavButton section='wie-zijn-wij' text='Wie zijn wij' />
-              <NavButton section='onze-diensten' text='Onze diensten' />
-              <NavButton section='onze-werkwijze' text='Onze werkwijze' />
+              <NavButton sectionId='onze-ambities' text='Onze ambities' />
+              <NavButton sectionId='wie-zijn-wij' text='Wie zijn wij' />
+              <NavButton sectionId='onze-diensten' text='Onze diensten' />
+              <NavButton sectionId='onze-werkwijze' text='Onze werkwijze' />
             </ul>
           </nav>
         </div>
       </wired-card>
     </header>
+  )
 }
 
 export default Header;
